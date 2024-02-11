@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../includes/head") %>
+  <body>
+    <h1><%= title %> Page</h1>
+    <a href="/admin/create-post">Create a new post</a>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, quibusdam
+      tenetur mollitia reiciendis ut quae inventore adipisci nisi odio
+      consequatur incidunt placeat hic recusandae. Commodi facere magni
+      architecto atque placeat.
+    </p>
+    <hr />
+    <h1>Posts</h1>
+    <% if (posts.length === 0) { %>
+    <h2>no posts found</h2>
+    <p>create new one</p>
+    <% } %> <% for(post of posts) {%>
+    <div class="posts">
+      <h2><%= post.title %></h2>
+      <a href="/post/<%= post.id  %>">See More....</a>
+    </div>
+    <% } %>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../includes/head") %>
+  <body>
+    <section>
+      <h1>Add post here</h1>
+      <a href="/">Back to home</a>
+      <form action="/admin" method="post">
+        <div>
+          <label for="title">Add Title</label>
+          <input type="text" name="title" id="title" required /><br />
+        </div>
+        <div>
+          <label for="title">Add Photo</label>
+          <input type="text" name="photo" id="title" required /><br />
+        </div>
+        <div>
+          <label for="description">Add Description</label>
+          <textarea name="description" id="" cols="30" rows="5"></textarea>
+          <br />
+        </div>
+        <button>Create</button>
+      </form>
+    </section>
+  </body>
+</html>

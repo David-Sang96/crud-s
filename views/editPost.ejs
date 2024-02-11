@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../includes/head") %>
+  <body>
+    <section>
+      <h1>Edit post here</h1>
+      <a href="/">Back to home</a>
+      <form action="/admin/post-edit/<%=post.id  %>" method="post">
+        <!-- <input type="text" name="post_id" value="<%= post.id %>" hidden /> -->
+        <div>
+          <label for="title">Add Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value="<%=post.title %>"
+            required
+          /><br />
+        </div>
+        <div>
+          <label for="title">Add Photo</label>
+          <input
+            type="text"
+            name="photo"
+            id="title"
+            value="<%=post.imgUrl  %>"
+            required
+          /><br />
+        </div>
+        <div>
+          <label for="description">Add Description</label>
+          <textarea name="description" id="" cols="30" rows="5">
+            <%=post.description  %></textarea
+          >
+          <br />
+        </div>
+        <button>Update</button>
+      </form>
+    </section>
+  </body>
+</html>
