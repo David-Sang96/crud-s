@@ -2,7 +2,8 @@ const Post = require("../models/post");
 
 exports.createPost = (req, res) => {
   const { title, description, photo } = req.body;
-  Post.create({ title, description, imgUrl: photo })
+  req.user
+    .createPost({ title, description, imgUrl: photo })
     .then(res.redirect("/"))
     .catch((e) => console.log(e));
 };

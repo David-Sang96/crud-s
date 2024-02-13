@@ -7,11 +7,24 @@ const bodyParser = require("body-parser");
 
 const sequelize = require("./ultis/database");
 
+const Post = require("./models/post");
+const User = require("./models/user");
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then((user) => {
+      req.user = user;
+      console.log("User", user);
+      next();
+    })
+    .catch((e) => console.log(e));
+});
 
 app.use((req, res, next) => {
   console.log("parent middleware done");
@@ -28,18 +41,24 @@ app.use("/admin", (req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Cache-Control",
-    "no-store, no-cache, must-revalidate, private"
-  );
-  next();
-});
-
 app.use("/admin", adminRouter);
 app.use(postRouter);
 
+Post.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Post);
 sequelize
   .sync()
-  .then(app.listen(PORT))
+  .then(() => {
+    return User.findByPk(1);
+  })
+  .then((user) => {
+    if (!user) {
+      return User.create({ name: "David", email: "luainawl@gmail.com" });
+    }
+    return user;
+  })
+  .then((user) => {
+    console.log(user);
+    app.listen(PORT);
+  })
   .catch((e) => console.log(e));
